@@ -74,6 +74,48 @@ namespace InkOnScreen.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Image10 {
+            get {
+                object obj = ResourceManager.GetObject("Image10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Image11 {
+            get {
+                object obj = ResourceManager.GetObject("Image11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Image12 {
+            get {
+                object obj = ResourceManager.GetObject("Image12", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Image13 {
+            get {
+                object obj = ResourceManager.GetObject("Image13", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Image14 {
+            get {
+                object obj = ResourceManager.GetObject("Image14", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Image15 {
+            get {
+                object obj = ResourceManager.GetObject("Image15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Image2 {
             get {
                 object obj = ResourceManager.GetObject("Image2", resourceCulture);
@@ -119,6 +161,13 @@ namespace InkOnScreen.Properties {
         internal static System.Drawing.Bitmap Image8 {
             get {
                 object obj = ResourceManager.GetObject("Image8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Image9 {
+            get {
+                object obj = ResourceManager.GetObject("Image9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

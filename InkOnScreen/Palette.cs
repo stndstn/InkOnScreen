@@ -26,47 +26,16 @@ namespace InkOnScreen
         private void Palette_FormClosed(object sender, FormClosedEventArgs e)
         {
             Console.WriteLine("Palette_FormClosed");
-            //isClosing = false;
-            /*
-            if (isClosing == false)
-            {
-                isClosing = true;
-                this.Owner.Close();
-            }
-             */
         }
 
         private void Palette_VisibleChanged(object sender, EventArgs e)
         {
             Console.WriteLine("Palette_VisibleChanged");
-            Form1 fm = (Form1)this.Owner;
-
-            if (this.Visible == false && fm.mStopCopyDesktopImage == false)
-            {
-                //isClosing = true;
-            }
-            /*
-            if (this.Visible)
-            {
-                this.Owner.Show();
-            }
-            else
-            {
-                this.Owner.Hide();
-            }
-             * */
         }
 
         private void Palette_Activated(object sender, EventArgs e)
         {
             Console.WriteLine("Palette_Activated");
-            //Form1 fm = (Form1)this.Owner;
-            /*
-            if (fm.isCopyingDesktopImage == false)
-            {
-                fm.CopyDesktopImage();
-            }
-             */
             this.Owner.WindowState = FormWindowState.Maximized;
         }
 
@@ -80,6 +49,7 @@ namespace InkOnScreen
         {
             Form1 fm = (Form1)this.Owner;
             fm.mInkPicture.DefaultDrawingAttributes.Color = Color.Red;
+            restoreInkMode();
             ActivatePaintingScreen();
         }
 
@@ -87,6 +57,7 @@ namespace InkOnScreen
         {
             Form1 fm = (Form1)this.Owner;
             fm.mInkPicture.DefaultDrawingAttributes.Color = Color.Blue;
+            restoreInkMode();
             ActivatePaintingScreen();
         }
 
@@ -94,6 +65,7 @@ namespace InkOnScreen
         {
             Form1 fm = (Form1)this.Owner;
             fm.mInkPicture.DefaultDrawingAttributes.Color = Color.Yellow;
+            restoreInkMode();
             ActivatePaintingScreen();
         }
 
@@ -101,6 +73,7 @@ namespace InkOnScreen
         {
             Form1 fm = (Form1)this.Owner;
             fm.mInkPicture.DefaultDrawingAttributes.Color = Color.Lime;
+            restoreInkMode();
             ActivatePaintingScreen();
         }
 
@@ -108,6 +81,7 @@ namespace InkOnScreen
         {
             Form1 fm = (Form1)this.Owner;
             fm.mInkPicture.DefaultDrawingAttributes.Color = Color.White;
+            restoreInkMode();
             ActivatePaintingScreen();
         }
 
@@ -115,6 +89,7 @@ namespace InkOnScreen
         {
             Form1 fm = (Form1)this.Owner;
             fm.mInkPicture.DefaultDrawingAttributes.Color = Color.Black;
+            restoreInkMode();
             ActivatePaintingScreen();
         }
 
@@ -133,6 +108,7 @@ namespace InkOnScreen
         {
             Form1 fm = (Form1)this.Owner;
             fm.SaveImage();
+            restoreInkMode();
             ActivatePaintingScreen();
         }
 
@@ -140,21 +116,33 @@ namespace InkOnScreen
         {
             Form1 fm = (Form1)this.Owner;
             fm.CopyToClipboard();
+            restoreInkMode();
             ActivatePaintingScreen();
         }
 
         private void pictSelect_Click(object sender, EventArgs e)
         {
+            Form1 fm = (Form1)this.Owner;
+            Rectangle rc = fm.mRcSelected; // backup because it will be emptied after CopyDesktopImage() was called.
+            if (rc != Rectangle.Empty)
+            {
+                if (fm.mUseDesktopImgAsBG)
+                {
+                    fm.CopyDesktopImage();
+                    fm.mRcSelected = rc;
+                }
+            }
             SelDesktopRectScreen s = new SelDesktopRectScreen();
             s.ShowDialog();
-            Form1 fm = (Form1)this.Owner;
             fm.mRcSelected = s.SelectedRect;
+            fm.DrawSelRect();
         }
 
         private void pictDelete_Click(object sender, EventArgs e)
         {
             Form1 fm = (Form1)this.Owner;
             fm.Clear();
+            restoreInkMode();
             ActivatePaintingScreen();
         }
 
@@ -172,6 +160,7 @@ namespace InkOnScreen
             fm.mInkPicture.DefaultDrawingAttributes.Width = 100;
             fm.mInkPicture.DefaultDrawingAttributes.Height = 100;
             fm.mInkPicture.DefaultDrawingAttributes.PenTip = PenTip.Ball;
+            restoreInkMode();
             ActivatePaintingScreen();
         }
 
@@ -181,6 +170,7 @@ namespace InkOnScreen
             fm.mInkPicture.DefaultDrawingAttributes.Width = 200;
             fm.mInkPicture.DefaultDrawingAttributes.Height = 200;
             fm.mInkPicture.DefaultDrawingAttributes.PenTip = PenTip.Ball;
+            restoreInkMode();
             ActivatePaintingScreen();
         }
 
@@ -190,6 +180,7 @@ namespace InkOnScreen
             fm.mInkPicture.DefaultDrawingAttributes.Width = 200;
             fm.mInkPicture.DefaultDrawingAttributes.Height = 100;
             fm.mInkPicture.DefaultDrawingAttributes.PenTip = PenTip.Rectangle;
+            restoreInkMode();
             ActivatePaintingScreen();
         }
 
@@ -199,7 +190,95 @@ namespace InkOnScreen
             fm.mInkPicture.DefaultDrawingAttributes.Width = 100;
             fm.mInkPicture.DefaultDrawingAttributes.Height = 200;
             fm.mInkPicture.DefaultDrawingAttributes.PenTip = PenTip.Rectangle;
+            restoreInkMode();
             ActivatePaintingScreen();
+        }
+
+        private void pictGrid_Click(object sender, EventArgs e)
+        {
+            Form1 fm = (Form1)this.Owner;
+            if (fm.mHasGrid)
+            {
+                fm.mHasGrid = false;
+                fm.Activate();
+            }
+            else
+            {
+                fm.mHasGrid = true;
+                fm.DrawGrid();
+                ActivatePaintingScreen();
+                /*
+                fm.mStopCopyDesktopImage = true;
+                fm.DrawGrid();
+                fm.Activate();
+                fm.mStopCopyDesktopImage = false;
+                 */
+            }
+        }
+
+        private void Palette_KeyDown(object sender, KeyEventArgs e)
+        {
+            Form1 fm = (Form1)this.Owner;
+            if (e.Control && (e.KeyCode == Keys.C))
+            {
+                fm.CopyToClipboard();
+            }
+            else if (e.Control && (e.KeyCode == Keys.S))
+            {
+                fm.SaveImage();
+            }
+        }
+
+        private void pictUndo_Click(object sender, EventArgs e)
+        {
+            Form1 fm = (Form1)this.Owner;
+            fm.Undo();
+            restoreInkMode();
+            ActivatePaintingScreen();
+        }
+
+        private void pictRefreshBG_Click(object sender, EventArgs e)
+        {
+            Form1 fm = (Form1)this.Owner;
+            fm.mUseDesktopImgAsBG = true;
+            fm.CopyDesktopImage();
+            restoreInkMode();
+            ActivatePaintingScreen();
+        }
+
+        private void pictErase_Click(object sender, EventArgs e)
+        {
+            Form1 fm = (Form1)this.Owner;
+            fm.mInkPicture.EditingMode = InkOverlayEditingMode.Delete;
+            fm.mInkPicture.EraserMode = InkOverlayEraserMode.PointErase;
+            ActivatePaintingScreen();
+        }
+
+        private void restoreInkMode()
+        {
+            Form1 fm = (Form1)this.Owner;
+            fm.mInkPicture.EditingMode = InkOverlayEditingMode.Ink;
+        }
+
+        private void pictPick_Click(object sender, EventArgs e)
+        {
+            Form1 fm = (Form1)this.Owner;
+            fm.mInkPicture.EditingMode = InkOverlayEditingMode.Select;
+        }
+
+        private void pictCleaner_Click(object sender, EventArgs e)
+        {
+            Form1 fm = (Form1)this.Owner;
+            fm.mInkPicture.EditingMode = InkOverlayEditingMode.Delete;
+            fm.mInkPicture.EraserMode = InkOverlayEraserMode.StrokeErase;
+        }
+
+        private void pictNew_Click(object sender, EventArgs e)
+        {
+            Form1 fm = (Form1)this.Owner;
+            fm.mUseDesktopImgAsBG = false;
+            fm.NewEmptyImage();
+            ActivatePaintingScreen();            
         }
 
     }

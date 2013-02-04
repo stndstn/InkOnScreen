@@ -49,6 +49,7 @@ namespace InkOnScreen
                     Graphics g = c.CreateGraphics();
                     Pen p = new Pen(Color.Blue);
                     g.DrawRectangle(p, rc);
+                    p.Dispose();
                     g.Dispose();
                 }
             }

@@ -47,26 +47,19 @@ namespace InkOnScreen
         [DllImport("user32.dll", EntryPoint = "ReleaseDC")]
         public static extern IntPtr ReleaseDC(IntPtr hWnd, IntPtr hDC);
 
-        NotifyIcon mNotifyIcon = null;
-        Palette mPaletteDlg = null;
         public InkPicture mInkPicture = null;
         public bool mStopCopyDesktopImage = false;
-        private bool mIsClosing = false;
         public Rectangle mRcSelected = Rectangle.Empty;
-
+        public bool mHasGrid = false;
+        public bool mUseDesktopImgAsBG = false;
+        NotifyIcon mNotifyIcon = null;
+        Palette mPaletteDlg = null;
+        Bitmap mBmpBGImg = null;
+        private bool mIsClosing = false;
 
         /*
          * To-do
-         *   Pen
-         *     Color
-         *     PenTip
-         *     Height, Width
-         *   Save as Jpeg
-         *     Ctrl + S (whole screen)
-         *     Specify the region and Ctrl + S
-         *   Copy Bitmap to Clipboard
-         *     Ctrl + C (whole screen)
-         *     Specify the region and Ctrl + C
+         *   Erase
          */
         public Form1()
         {
@@ -134,6 +127,16 @@ namespace InkOnScreen
             throw new NotImplementedException();
         }
         */
+        public void Undo()
+        {
+            int count = mInkPicture.Ink.Strokes.Count;
+            if (count > 0)
+            {
+                Stroke lastStroke = mInkPicture.Ink.Strokes[count - 1];
+                mInkPicture.Ink.DeleteStroke(lastStroke);
+                mInkPicture.Refresh();
+            }
+        }
         public void CopyDesktopImage()
         {
             Console.WriteLine("CopyDesktopImage");
@@ -161,28 +164,91 @@ namespace InkOnScreen
                 DeleteDC(hdcCompatible);
                 ReleaseDC(GetDesktopWindow(), hdcScreen);
 
-                Bitmap bmp = System.Drawing.Image.FromHbitmap(hBmp);
+                if (mBmpBGImg != null) mBmpBGImg.Dispose();
+
+                mBmpBGImg = System.Drawing.Image.FromHbitmap(hBmp);
 
                 DeleteObject(hBmp);
                 GC.Collect();
                 
                 //draw grid
-                Graphics g = Graphics.FromImage(bmp);
-                for (int x = 0; x < bmp.Width; x += 50)
+                if (mHasGrid)
                 {
-                    g.DrawLine(new Pen(Color.Green), x, 0, x, bmp.Height);
+                    DrawGrid(mBmpBGImg);
                 }
-                for (int y = 0; y < bmp.Height; y += 50)
-                {
-                    g.DrawLine(new Pen(Color.Green), 0, y, bmp.Width, y);
-                }
-                g.Dispose();
-                
-                mInkPicture.BackgroundImage = bmp;
+                mInkPicture.BackgroundImage = mBmpBGImg;
             }
             this.WindowState = FormWindowState.Maximized;
             ShowPalette();
             mStopCopyDesktopImage = false;
+        }
+        public void NewEmptyImage()
+        {
+            Console.WriteLine("NewEmptyImage");
+            Graphics g = Graphics.FromImage(mInkPicture.BackgroundImage);
+            Brush whiteBrush = new SolidBrush(Color.White);
+            g.FillRectangle(whiteBrush, mInkPicture.ClientRectangle);
+            whiteBrush.Dispose();
+            g.Dispose();
+            mInkPicture.Refresh();
+        }
+
+        public void DrawSelRect()
+        {
+            //Graphics g = Graphics.FromImage(mInkPicture.BackgroundImage);
+            //Pen pen = new Pen(Color.Blue);
+            //g.DrawRectangle(pen, this.mRcSelected);
+            //mInkPicture.Refresh();
+            //pen.Dispose();
+
+            // draw xor rect
+            Color colorOrg = Color.Empty;
+            Color colorXor = Color.Empty;
+            for (int x = mRcSelected.Left; x < mRcSelected.Right; x++)
+            {
+                colorOrg = mBmpBGImg.GetPixel(x, mRcSelected.Top);
+                colorXor = Color.FromArgb(255 - colorOrg.A, 255 - colorOrg.R, 255 - colorOrg.G, 255 - colorOrg.B);
+                mBmpBGImg.SetPixel(x, mRcSelected.Top, colorXor);
+            }
+            for (int x = mRcSelected.Left; x < mRcSelected.Right; x++)
+            {
+                colorOrg = mBmpBGImg.GetPixel(x, mRcSelected.Bottom);
+                colorXor = Color.FromArgb(255 - colorOrg.A, 255 - colorOrg.R, 255 - colorOrg.G, 255 - colorOrg.B);
+                mBmpBGImg.SetPixel(x, mRcSelected.Bottom, colorXor);
+            }
+            for (int y = mRcSelected.Top; y < mRcSelected.Bottom; y++)
+            {
+                colorOrg = mBmpBGImg.GetPixel(mRcSelected.Left, y);
+                colorXor = Color.FromArgb(255 - colorOrg.A, 255 - colorOrg.R, 255 - colorOrg.G, 255 - colorOrg.B);
+                mBmpBGImg.SetPixel(mRcSelected.Left, y, colorXor);
+            }
+            for (int y = mRcSelected.Top; y < mRcSelected.Bottom; y++)
+            {
+                colorOrg = mBmpBGImg.GetPixel(mRcSelected.Right, y);
+                colorXor = Color.FromArgb(255 - colorOrg.A, 255 - colorOrg.R, 255 - colorOrg.G, 255 - colorOrg.B);
+                mBmpBGImg.SetPixel(mRcSelected.Right, y, colorXor);
+            }
+            mInkPicture.Refresh();
+        }
+        public void DrawGrid()
+        {
+            DrawGrid(mInkPicture.BackgroundImage);
+            mInkPicture.Refresh();
+        }
+        private void DrawGrid(Image img)
+        {
+            Graphics g = Graphics.FromImage(img);
+            Pen pen = new Pen(Color.Green);
+            for (int x = 0; x < img.Width; x += 50)
+            {
+                g.DrawLine(pen, x, 0, x, img.Height);
+            }
+            for (int y = 0; y < img.Height; y += 50)
+            {
+                g.DrawLine(pen, 0, y, img.Width, y);
+            }
+            pen.Dispose();
+            g.Dispose();
         }
 
         private void HidePalette()
@@ -192,7 +258,7 @@ namespace InkOnScreen
                 mPaletteDlg.WindowState = FormWindowState.Normal;
             }
         }
-        private void ShowPalette()
+        public void ShowPalette()
         {
             if (mPaletteDlg == null || mPaletteDlg.IsDisposed)
             {
@@ -215,11 +281,18 @@ namespace InkOnScreen
             mRcSelected = Rectangle.Empty;
             if (mStopCopyDesktopImage == false && mIsClosing == false)
             {
-//                CopyDesktopImage();
+                //                CopyDesktopImage();
                 //if (this.Visible && mPaletteDlg.Visible == false)
                 if (this.Visible)
                 {
-                    CopyDesktopImage();
+                    if (mUseDesktopImgAsBG)
+                    {
+                        CopyDesktopImage();
+                    }
+                    else
+                    {
+                        ShowPalette();
+                    }
                     //ShowPalette();
                     //paletteDlg.Show(this);
                 }
@@ -241,8 +314,10 @@ namespace InkOnScreen
         {
             Console.WriteLine("Form1_FormClosing");
             mIsClosing = true;
-            mPaletteDlg.Close();
-            mNotifyIcon.Dispose();
+            if (mPaletteDlg != null && mPaletteDlg.IsDisposed == false)
+            {
+                mPaletteDlg.Close();
+            }
         }
 
         public void SaveImage()
@@ -296,9 +371,31 @@ namespace InkOnScreen
 
         public void Clear()
         {
-            foreach (Stroke st in mInkPicture.Ink.Strokes)
+            if (this.mRcSelected == Rectangle.Empty)
             {
-                mInkPicture.Ink.DeleteStroke(st);
+                // remove all
+                foreach (Stroke st in mInkPicture.Ink.Strokes)
+                {
+                    mInkPicture.Ink.DeleteStroke(st);
+                }
+            }
+            else
+            {
+                // remove all strokes inside the selected rect
+                Graphics g = Graphics.FromImage(this.mBmpBGImg);
+                Point[] pts = new Point[2];
+                pts[0] = new Point(mRcSelected.Left, mRcSelected.Top);
+                pts[1] = new Point(mRcSelected.Right, mRcSelected.Bottom);
+                mInkPicture.Renderer.PixelToInkSpace(g, ref pts);
+                Rectangle rcSelInk = new Rectangle(pts[0].X, pts[0].Y, pts[1].X - pts[0].X, pts[1].Y - pts[0].Y);
+                foreach (Stroke st in mInkPicture.Ink.Strokes)
+                {
+                    Rectangle rcBound = st.GetBoundingBox();
+                    if (rcSelInk.Contains(rcBound))
+                    {
+                        mInkPicture.Ink.DeleteStroke(st);
+                    }
+                }
             }
             mInkPicture.Refresh();
         }
@@ -320,5 +417,29 @@ namespace InkOnScreen
             //Visible = false;
             WindowState = FormWindowState.Minimized;
         }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && (e.KeyCode == Keys.C))
+            {
+                CopyToClipboard();
+            }
+            else if (e.Control && (e.KeyCode == Keys.S))
+            {
+                SaveImage();
+            }
+            else if (e.Control && (e.KeyCode == Keys.Z))
+            {
+                Undo();
+            }
+            else if (e.KeyCode == Keys.F5)
+            {
+                if (mUseDesktopImgAsBG)
+                {
+                    CopyDesktopImage();
+                }
+            }
+        }
+
     }
 }

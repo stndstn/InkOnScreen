@@ -42,6 +42,13 @@
             this.pictPenRectH = new System.Windows.Forms.PictureBox();
             this.pictPenRectV = new System.Windows.Forms.PictureBox();
             this.pictDelete = new System.Windows.Forms.PictureBox();
+            this.pictGrid = new System.Windows.Forms.PictureBox();
+            this.pictUndo = new System.Windows.Forms.PictureBox();
+            this.pictRefreshBG = new System.Windows.Forms.PictureBox();
+            this.pictErase = new System.Windows.Forms.PictureBox();
+            this.pictPick = new System.Windows.Forms.PictureBox();
+            this.pictCleaner = new System.Windows.Forms.PictureBox();
+            this.pictNew = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictSelect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictCopy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictSave)).BeginInit();
@@ -50,15 +57,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictPenRectH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictPenRectV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictDelete)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictUndo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictRefreshBG)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictErase)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictPick)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictCleaner)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictNew)).BeginInit();
             this.SuspendLayout();
             // 
             // panelColorRed
             // 
             this.panelColorRed.BackColor = System.Drawing.Color.Red;
             this.panelColorRed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelColorRed.Location = new System.Drawing.Point(3, 1);
+            this.panelColorRed.Location = new System.Drawing.Point(2, 0);
             this.panelColorRed.Name = "panelColorRed";
-            this.panelColorRed.Size = new System.Drawing.Size(15, 16);
+            this.panelColorRed.Size = new System.Drawing.Size(17, 17);
             this.panelColorRed.TabIndex = 0;
             this.panelColorRed.Click += new System.EventHandler(this.panelColorRed_Click);
             // 
@@ -66,9 +80,9 @@
             // 
             this.panelColorBlue.BackColor = System.Drawing.Color.Blue;
             this.panelColorBlue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelColorBlue.Location = new System.Drawing.Point(22, 1);
+            this.panelColorBlue.Location = new System.Drawing.Point(21, 0);
             this.panelColorBlue.Name = "panelColorBlue";
-            this.panelColorBlue.Size = new System.Drawing.Size(15, 16);
+            this.panelColorBlue.Size = new System.Drawing.Size(17, 17);
             this.panelColorBlue.TabIndex = 1;
             this.panelColorBlue.Click += new System.EventHandler(this.panelColorBlue_Click);
             // 
@@ -76,9 +90,9 @@
             // 
             this.panelColorYellow.BackColor = System.Drawing.Color.Yellow;
             this.panelColorYellow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelColorYellow.Location = new System.Drawing.Point(41, 1);
+            this.panelColorYellow.Location = new System.Drawing.Point(40, 0);
             this.panelColorYellow.Name = "panelColorYellow";
-            this.panelColorYellow.Size = new System.Drawing.Size(15, 16);
+            this.panelColorYellow.Size = new System.Drawing.Size(17, 17);
             this.panelColorYellow.TabIndex = 3;
             this.panelColorYellow.Click += new System.EventHandler(this.panelColorYellow_Click);
             // 
@@ -86,9 +100,9 @@
             // 
             this.panelColorGreen.BackColor = System.Drawing.Color.Lime;
             this.panelColorGreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelColorGreen.Location = new System.Drawing.Point(59, 1);
+            this.panelColorGreen.Location = new System.Drawing.Point(59, 0);
             this.panelColorGreen.Name = "panelColorGreen";
-            this.panelColorGreen.Size = new System.Drawing.Size(15, 16);
+            this.panelColorGreen.Size = new System.Drawing.Size(17, 17);
             this.panelColorGreen.TabIndex = 4;
             this.panelColorGreen.Click += new System.EventHandler(this.panelColorGreen_Click);
             // 
@@ -96,9 +110,9 @@
             // 
             this.panelColorWhite.BackColor = System.Drawing.Color.White;
             this.panelColorWhite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelColorWhite.Location = new System.Drawing.Point(77, 1);
+            this.panelColorWhite.Location = new System.Drawing.Point(78, 0);
             this.panelColorWhite.Name = "panelColorWhite";
-            this.panelColorWhite.Size = new System.Drawing.Size(15, 16);
+            this.panelColorWhite.Size = new System.Drawing.Size(17, 17);
             this.panelColorWhite.TabIndex = 5;
             this.panelColorWhite.Click += new System.EventHandler(this.panelColorWhite_Click);
             // 
@@ -106,9 +120,9 @@
             // 
             this.panelColorBlack.BackColor = System.Drawing.Color.Black;
             this.panelColorBlack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelColorBlack.Location = new System.Drawing.Point(95, 1);
+            this.panelColorBlack.Location = new System.Drawing.Point(97, 0);
             this.panelColorBlack.Name = "panelColorBlack";
-            this.panelColorBlack.Size = new System.Drawing.Size(15, 16);
+            this.panelColorBlack.Size = new System.Drawing.Size(17, 17);
             this.panelColorBlack.TabIndex = 6;
             this.panelColorBlack.Click += new System.EventHandler(this.panelColorBlack_Click);
             // 
@@ -116,7 +130,7 @@
             // 
             this.pictSelect.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictSelect.Image = global::InkOnScreen.Properties.Resources.Image7;
-            this.pictSelect.Location = new System.Drawing.Point(40, 18);
+            this.pictSelect.Location = new System.Drawing.Point(78, 18);
             this.pictSelect.Name = "pictSelect";
             this.pictSelect.Size = new System.Drawing.Size(18, 18);
             this.pictSelect.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -128,7 +142,7 @@
             // 
             this.pictCopy.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictCopy.Image = global::InkOnScreen.Properties.Resources.Image6;
-            this.pictCopy.Location = new System.Drawing.Point(21, 18);
+            this.pictCopy.Location = new System.Drawing.Point(59, 18);
             this.pictCopy.Name = "pictCopy";
             this.pictCopy.Size = new System.Drawing.Size(18, 18);
             this.pictCopy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -140,7 +154,7 @@
             // 
             this.pictSave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictSave.Image = global::InkOnScreen.Properties.Resources.Image5;
-            this.pictSave.Location = new System.Drawing.Point(2, 18);
+            this.pictSave.Location = new System.Drawing.Point(40, 18);
             this.pictSave.Name = "pictSave";
             this.pictSave.Size = new System.Drawing.Size(18, 18);
             this.pictSave.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -200,7 +214,7 @@
             // 
             this.pictDelete.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictDelete.Image = global::InkOnScreen.Properties.Resources.Image8;
-            this.pictDelete.Location = new System.Drawing.Point(59, 18);
+            this.pictDelete.Location = new System.Drawing.Point(97, 18);
             this.pictDelete.Name = "pictDelete";
             this.pictDelete.Size = new System.Drawing.Size(18, 18);
             this.pictDelete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -208,11 +222,102 @@
             this.pictDelete.TabStop = false;
             this.pictDelete.Click += new System.EventHandler(this.pictDelete_Click);
             // 
+            // pictGrid
+            // 
+            this.pictGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictGrid.Image = global::InkOnScreen.Properties.Resources.Image9;
+            this.pictGrid.Location = new System.Drawing.Point(116, 18);
+            this.pictGrid.Name = "pictGrid";
+            this.pictGrid.Size = new System.Drawing.Size(18, 18);
+            this.pictGrid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictGrid.TabIndex = 15;
+            this.pictGrid.TabStop = false;
+            this.pictGrid.Click += new System.EventHandler(this.pictGrid_Click);
+            // 
+            // pictUndo
+            // 
+            this.pictUndo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictUndo.Image = global::InkOnScreen.Properties.Resources.Image10;
+            this.pictUndo.Location = new System.Drawing.Point(135, 18);
+            this.pictUndo.Name = "pictUndo";
+            this.pictUndo.Size = new System.Drawing.Size(18, 18);
+            this.pictUndo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictUndo.TabIndex = 16;
+            this.pictUndo.TabStop = false;
+            this.pictUndo.Click += new System.EventHandler(this.pictUndo_Click);
+            // 
+            // pictRefreshBG
+            // 
+            this.pictRefreshBG.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictRefreshBG.Image = global::InkOnScreen.Properties.Resources.Image11;
+            this.pictRefreshBG.Location = new System.Drawing.Point(21, 18);
+            this.pictRefreshBG.Name = "pictRefreshBG";
+            this.pictRefreshBG.Size = new System.Drawing.Size(18, 18);
+            this.pictRefreshBG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictRefreshBG.TabIndex = 17;
+            this.pictRefreshBG.TabStop = false;
+            this.pictRefreshBG.Click += new System.EventHandler(this.pictRefreshBG_Click);
+            // 
+            // pictErase
+            // 
+            this.pictErase.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictErase.Image = global::InkOnScreen.Properties.Resources.Image12;
+            this.pictErase.Location = new System.Drawing.Point(154, 18);
+            this.pictErase.Name = "pictErase";
+            this.pictErase.Size = new System.Drawing.Size(18, 18);
+            this.pictErase.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictErase.TabIndex = 18;
+            this.pictErase.TabStop = false;
+            this.pictErase.Click += new System.EventHandler(this.pictErase_Click);
+            // 
+            // pictPick
+            // 
+            this.pictPick.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictPick.Image = global::InkOnScreen.Properties.Resources.Image13;
+            this.pictPick.Location = new System.Drawing.Point(78, 37);
+            this.pictPick.Name = "pictPick";
+            this.pictPick.Size = new System.Drawing.Size(18, 18);
+            this.pictPick.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictPick.TabIndex = 19;
+            this.pictPick.TabStop = false;
+            this.pictPick.Click += new System.EventHandler(this.pictPick_Click);
+            // 
+            // pictCleaner
+            // 
+            this.pictCleaner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictCleaner.Image = global::InkOnScreen.Properties.Resources.Image14;
+            this.pictCleaner.Location = new System.Drawing.Point(173, 18);
+            this.pictCleaner.Name = "pictCleaner";
+            this.pictCleaner.Size = new System.Drawing.Size(18, 18);
+            this.pictCleaner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictCleaner.TabIndex = 20;
+            this.pictCleaner.TabStop = false;
+            this.pictCleaner.Click += new System.EventHandler(this.pictCleaner_Click);
+            // 
+            // pictNew
+            // 
+            this.pictNew.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictNew.Image = global::InkOnScreen.Properties.Resources.Image15;
+            this.pictNew.Location = new System.Drawing.Point(2, 18);
+            this.pictNew.Name = "pictNew";
+            this.pictNew.Size = new System.Drawing.Size(18, 18);
+            this.pictNew.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictNew.TabIndex = 21;
+            this.pictNew.TabStop = false;
+            this.pictNew.Click += new System.EventHandler(this.pictNew_Click);
+            // 
             // Palette
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(125, 60);
+            this.ClientSize = new System.Drawing.Size(192, 60);
+            this.Controls.Add(this.pictNew);
+            this.Controls.Add(this.pictCleaner);
+            this.Controls.Add(this.pictPick);
+            this.Controls.Add(this.pictErase);
+            this.Controls.Add(this.pictRefreshBG);
+            this.Controls.Add(this.pictUndo);
+            this.Controls.Add(this.pictGrid);
             this.Controls.Add(this.pictDelete);
             this.Controls.Add(this.pictPenRectV);
             this.Controls.Add(this.pictPenRectH);
@@ -228,6 +333,7 @@
             this.Controls.Add(this.panelColorBlue);
             this.Controls.Add(this.panelColorRed);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Palette";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -240,6 +346,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Palette_FormClosed);
             this.Load += new System.EventHandler(this.Palette_Load);
             this.VisibleChanged += new System.EventHandler(this.Palette_VisibleChanged);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Palette_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictSelect)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictCopy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictSave)).EndInit();
@@ -248,6 +355,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictPenRectH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictPenRectV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictDelete)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictUndo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictRefreshBG)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictErase)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictPick)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictCleaner)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictNew)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,6 +383,13 @@
         private System.Windows.Forms.PictureBox pictPenRectH;
         private System.Windows.Forms.PictureBox pictPenRectV;
         private System.Windows.Forms.PictureBox pictDelete;
+        private System.Windows.Forms.PictureBox pictGrid;
+        private System.Windows.Forms.PictureBox pictUndo;
+        private System.Windows.Forms.PictureBox pictRefreshBG;
+        private System.Windows.Forms.PictureBox pictErase;
+        private System.Windows.Forms.PictureBox pictPick;
+        private System.Windows.Forms.PictureBox pictCleaner;
+        private System.Windows.Forms.PictureBox pictNew;
 
     }
 }
