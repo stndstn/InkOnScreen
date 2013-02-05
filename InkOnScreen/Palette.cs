@@ -36,6 +36,7 @@ namespace InkOnScreen
         private void Palette_Activated(object sender, EventArgs e)
         {
             Console.WriteLine("Palette_Activated");
+            this.Owner.Visible = true;
             this.Owner.WindowState = FormWindowState.Maximized;
         }
 
@@ -96,9 +97,11 @@ namespace InkOnScreen
         private void Palette_FormClosing(object sender, FormClosingEventArgs e)
         {
             Console.WriteLine("Palette_FormClosing");
-            if (this.Owner.WindowState != FormWindowState.Minimized)
+            //if (this.Owner.WindowState != FormWindowState.Minimized)
+            if (this.Owner.Visible == true)
             {
-                this.Owner.WindowState = FormWindowState.Minimized;
+                this.Owner.Visible = false;
+                //this.Owner.WindowState = FormWindowState.Minimized;
                 //e.Cancel = true;
                 //this.Hide();
             }
@@ -149,9 +152,9 @@ namespace InkOnScreen
         private void ActivatePaintingScreen()
         {
             Form1 fm = (Form1)this.Owner;
-            fm.mStopCopyDesktopImage = true;
+            fm.mStopRefreshImage = true;
             fm.Activate();
-            fm.mStopCopyDesktopImage = false;
+            fm.mStopRefreshImage = false;
         }
 
         private void pictPenBallS_Click(object sender, EventArgs e)

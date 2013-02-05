@@ -48,7 +48,7 @@ namespace InkOnScreen
         public static extern IntPtr ReleaseDC(IntPtr hWnd, IntPtr hDC);
 
         public InkPicture mInkPicture = null;
-        public bool mStopCopyDesktopImage = false;
+        public bool mStopRefreshImage = false;
         public Rectangle mRcSelected = Rectangle.Empty;
         public bool mHasGrid = false;
         public bool mUseDesktopImgAsBG = false;
@@ -140,9 +140,10 @@ namespace InkOnScreen
         public void CopyDesktopImage()
         {
             Console.WriteLine("CopyDesktopImage");
-            mStopCopyDesktopImage = true;
+            mStopRefreshImage = true;
 
-            this.WindowState = FormWindowState.Minimized;
+            this.Visible = false;
+            //this.WindowState = FormWindowState.Minimized;
             HidePalette();
 
             int screenX;
@@ -178,9 +179,10 @@ namespace InkOnScreen
                 }
                 mInkPicture.BackgroundImage = mBmpBGImg;
             }
-            this.WindowState = FormWindowState.Maximized;
+            this.Visible = true;
+            //this.WindowState = FormWindowState.Maximized;
             ShowPalette();
-            mStopCopyDesktopImage = false;
+            mStopRefreshImage = false;
         }
         public void NewEmptyImage()
         {
@@ -256,13 +258,15 @@ namespace InkOnScreen
 
         private void HidePalette()
         {
+            Console.WriteLine("HidePalette");
             if (mPaletteDlg != null && mPaletteDlg.IsDisposed == false)
             {
-                mPaletteDlg.WindowState = FormWindowState.Normal;
+                mPaletteDlg.WindowState = FormWindowState.Minimized;
             }
         }
         public void ShowPalette()
         {
+            Console.WriteLine("ShowPalette");
             if (mPaletteDlg == null || mPaletteDlg.IsDisposed)
             {
                 mPaletteDlg = null;
@@ -271,8 +275,9 @@ namespace InkOnScreen
             }
             else
             {
-                if (mPaletteDlg.Visible == false)
+                //if (mPaletteDlg.Visible == false)
                 {
+                    //mPaletteDlg.Visible = true;
                     mPaletteDlg.WindowState = FormWindowState.Normal;
                 }
             }
@@ -280,9 +285,9 @@ namespace InkOnScreen
         }
         private void Form1_Activated(object sender, EventArgs e)
         {
-            Console.WriteLine("Form1_Activated isCopyingDesktopImage:" + mStopCopyDesktopImage + " isClosing:" + mIsClosing + " visible:" + this.Visible);
+            Console.WriteLine("Form1_Activated isCopyingDesktopImage:" + mStopRefreshImage + " isClosing:" + mIsClosing + " visible:" + this.Visible);
             mRcSelected = Rectangle.Empty;
-            if (mStopCopyDesktopImage == false && mIsClosing == false)
+            if (mStopRefreshImage == false && mIsClosing == false)
             {
                 //                CopyDesktopImage();
                 //if (this.Visible && mPaletteDlg.Visible == false)
@@ -326,15 +331,21 @@ namespace InkOnScreen
 
         public void SaveImage()
         {
+            Console.WriteLine("SaveImage");
             Rectangle rc = mRcSelected;
             if (rc.IsEmpty)
             {
                 rc = new Rectangle(0, 0, mInkPicture.Width, mInkPicture.Height);
             }
+            mStopRefreshImage = true;
+            HidePalette();
             SaveImage(rc);
+            ShowPalette();
+            mStopRefreshImage = false;
         }
         private void SaveImage(Rectangle rc)
         {
+            Console.WriteLine("SaveImage rect x:{0} y:{1} width:{2} height:{3}", rc.X, rc.Y, rc.Width, rc.Height);
             Bitmap bmp = new Bitmap(rc.Width, rc.Height);
             Graphics g = Graphics.FromImage(bmp);
             g.CopyFromScreen(rc.Location, new Point(0, 0), rc.Size);
@@ -358,15 +369,21 @@ namespace InkOnScreen
 
         public void CopyToClipboard()
         {
+            Console.WriteLine("CopyToClipboard");
             Rectangle rc = mRcSelected;
             if (rc.IsEmpty)
             {
                 rc = new Rectangle(0, 0, mInkPicture.Width, mInkPicture.Height);
             }
+            mStopRefreshImage = true;
+            HidePalette();
             CopyToClipboard(rc);
+            ShowPalette();
+            mStopRefreshImage = false;
         }
         private void CopyToClipboard(Rectangle rc)
         {
+            Console.WriteLine("CopyToClipboard rect x:{0} y:{1} width:{2} height:{3}", rc.X, rc.Y, rc.Width, rc.Height);
             Bitmap bmp = new Bitmap(rc.Width, rc.Height);
             Graphics g = Graphics.FromImage(bmp);
             g.CopyFromScreen(rc.Location, new Point(0, 0), rc.Size);
@@ -418,8 +435,8 @@ namespace InkOnScreen
         private void Form1_Load(object sender, EventArgs e)
         {
             Console.WriteLine("Form1_Load");
-            //Visible = false;
-            WindowState = FormWindowState.Minimized;
+            Visible = false;
+            //WindowState = FormWindowState.Minimized;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
