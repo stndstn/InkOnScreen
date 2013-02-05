@@ -185,11 +185,14 @@ namespace InkOnScreen
         public void NewEmptyImage()
         {
             Console.WriteLine("NewEmptyImage");
-            Graphics g = Graphics.FromImage(mInkPicture.BackgroundImage);
+            if (mBmpBGImg != null) mBmpBGImg.Dispose();
+            mBmpBGImg = new Bitmap(mInkPicture.ClientSize.Width, mInkPicture.ClientSize.Height);
+            Graphics g = Graphics.FromImage(mBmpBGImg);
             Brush whiteBrush = new SolidBrush(Color.White);
             g.FillRectangle(whiteBrush, mInkPicture.ClientRectangle);
             whiteBrush.Dispose();
             g.Dispose();
+            mInkPicture.BackgroundImage = mBmpBGImg;
             mInkPicture.Refresh();
         }
 
@@ -291,6 +294,7 @@ namespace InkOnScreen
                     }
                     else
                     {
+                        NewEmptyImage();
                         ShowPalette();
                     }
                     //ShowPalette();
