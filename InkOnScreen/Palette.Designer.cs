@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Palette));
             this.panelColorRed = new System.Windows.Forms.Panel();
             this.panelColorBlue = new System.Windows.Forms.Panel();
             this.panelColorYellow = new System.Windows.Forms.Panel();
@@ -333,6 +334,7 @@
             this.Controls.Add(this.panelColorBlue);
             this.Controls.Add(this.panelColorRed);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Palette";

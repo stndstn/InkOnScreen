@@ -439,6 +439,7 @@ namespace InkOnScreen
             //WindowState = FormWindowState.Minimized;
         }
 
+        //Forms.KetPreview should be true
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && (e.KeyCode == Keys.C))
