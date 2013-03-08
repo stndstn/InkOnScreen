@@ -51,7 +51,7 @@ namespace InkOnScreen
         public bool mStopRefreshImage = false;
         public Rectangle mRcSelected = Rectangle.Empty;
         public bool mHasGrid = false;
-        public bool mUseDesktopImgAsBG = false;
+        public bool mUseDesktopImgAsBG = true;
         NotifyIcon mNotifyIcon = null;
         Palette mPaletteDlg = null;
         Bitmap mBmpBGImg = null;
