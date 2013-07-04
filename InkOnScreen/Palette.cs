@@ -263,12 +263,6 @@ namespace InkOnScreen
             fm.mInkPicture.EditingMode = InkOverlayEditingMode.Ink;
         }
 
-        private void pictPick_Click(object sender, EventArgs e)
-        {
-            Form1 fm = (Form1)this.Owner;
-            fm.mInkPicture.EditingMode = InkOverlayEditingMode.Select;
-        }
-
         private void pictCleaner_Click(object sender, EventArgs e)
         {
             Form1 fm = (Form1)this.Owner;

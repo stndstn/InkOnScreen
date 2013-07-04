@@ -47,7 +47,6 @@
             this.pictUndo = new System.Windows.Forms.PictureBox();
             this.pictRefreshBG = new System.Windows.Forms.PictureBox();
             this.pictErase = new System.Windows.Forms.PictureBox();
-            this.pictPick = new System.Windows.Forms.PictureBox();
             this.pictCleaner = new System.Windows.Forms.PictureBox();
             this.pictNew = new System.Windows.Forms.PictureBox();
             this.pictSelInk = new System.Windows.Forms.PictureBox();
@@ -64,7 +63,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictUndo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictRefreshBG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictErase)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictPick)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictCleaner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictNew)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictSelInk)).BeginInit();
@@ -267,7 +265,7 @@
             // 
             this.pictErase.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictErase.Image = global::InkOnScreen.Properties.Resources.Image12;
-            this.pictErase.Location = new System.Drawing.Point(135, 44);
+            this.pictErase.Location = new System.Drawing.Point(113, 44);
             this.pictErase.Name = "pictErase";
             this.pictErase.Size = new System.Drawing.Size(18, 18);
             this.pictErase.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -275,23 +273,11 @@
             this.pictErase.TabStop = false;
             this.pictErase.Click += new System.EventHandler(this.pictErase_Click);
             // 
-            // pictPick
-            // 
-            this.pictPick.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictPick.Image = global::InkOnScreen.Properties.Resources.Image13;
-            this.pictPick.Location = new System.Drawing.Point(90, 44);
-            this.pictPick.Name = "pictPick";
-            this.pictPick.Size = new System.Drawing.Size(18, 18);
-            this.pictPick.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictPick.TabIndex = 19;
-            this.pictPick.TabStop = false;
-            this.pictPick.Click += new System.EventHandler(this.pictPick_Click);
-            // 
             // pictCleaner
             // 
             this.pictCleaner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictCleaner.Image = global::InkOnScreen.Properties.Resources.Image14;
-            this.pictCleaner.Location = new System.Drawing.Point(157, 44);
+            this.pictCleaner.Location = new System.Drawing.Point(135, 44);
             this.pictCleaner.Name = "pictCleaner";
             this.pictCleaner.Size = new System.Drawing.Size(18, 18);
             this.pictCleaner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -315,7 +301,7 @@
             // 
             this.pictSelInk.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictSelInk.Image = global::InkOnScreen.Properties.Resources.Image18;
-            this.pictSelInk.Location = new System.Drawing.Point(112, 44);
+            this.pictSelInk.Location = new System.Drawing.Point(90, 44);
             this.pictSelInk.Name = "pictSelInk";
             this.pictSelInk.Size = new System.Drawing.Size(18, 18);
             this.pictSelInk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -343,7 +329,6 @@
             this.Controls.Add(this.pictSelInk);
             this.Controls.Add(this.pictNew);
             this.Controls.Add(this.pictCleaner);
-            this.Controls.Add(this.pictPick);
             this.Controls.Add(this.pictErase);
             this.Controls.Add(this.pictRefreshBG);
             this.Controls.Add(this.pictUndo);
@@ -390,7 +375,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictUndo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictRefreshBG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictErase)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictPick)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictCleaner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictNew)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictSelInk)).EndInit();
@@ -420,7 +404,6 @@
         private System.Windows.Forms.PictureBox pictUndo;
         private System.Windows.Forms.PictureBox pictRefreshBG;
         private System.Windows.Forms.PictureBox pictErase;
-        private System.Windows.Forms.PictureBox pictPick;
         private System.Windows.Forms.PictureBox pictCleaner;
         private System.Windows.Forms.PictureBox pictNew;
         private System.Windows.Forms.PictureBox pictSelInk;
