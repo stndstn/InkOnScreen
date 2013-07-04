@@ -80,7 +80,6 @@ namespace InkOnScreen
             //ShowPalette();
             
             // Create the NotifyIcon.
-            this.components = new System.ComponentModel.Container();
             this.mNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             // The Icon property sets the icon that will appear
             // in the systray for this application.

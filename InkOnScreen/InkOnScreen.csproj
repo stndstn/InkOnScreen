@@ -81,6 +81,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormTransparent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTransparent.Designer.cs">
+      <DependentUpon>FormTransparent.cs</DependentUpon>
+    </Compile>
     <Compile Include="SelDesktopRectScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormTransparent.resx">
+      <DependentUpon>FormTransparent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SelDesktopRectScreen.resx">
       <DependentUpon>SelDesktopRectScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -210,6 +219,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Image_renew.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image18.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image20.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

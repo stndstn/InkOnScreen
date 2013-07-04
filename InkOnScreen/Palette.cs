@@ -284,5 +284,23 @@ namespace InkOnScreen
             ActivatePaintingScreen();            
         }
 
+        private void pictTransparent_Click(object sender, EventArgs e)
+        {
+            Form1 fm = (Form1)this.Owner;
+            byte transparency = fm.mInkPicture.DefaultDrawingAttributes.Transparency;
+            FormTransparent form = new FormTransparent(transparency);
+            form.mShowLocation = new Point(this.Right, this.Top);
+            form.ShowDialog();
+            fm.mInkPicture.DefaultDrawingAttributes.Transparency = (byte)form.Value;
+            restoreInkMode();
+            ActivatePaintingScreen();
+        }
+
+        private void pictSelInk_Click(object sender, EventArgs e)
+        {
+            Form1 fm = (Form1)this.Owner;
+            fm.mInkPicture.EditingMode = InkOverlayEditingMode.Select;
+        }
+
     }
 }
